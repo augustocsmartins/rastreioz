@@ -33,7 +33,10 @@ module Rastreioz
     end
 
     def calcular(service_types)
-      response = with_log { http_request("#{URL}?#{params_for(service_types)}") }
+
+      @url = "#{URL}?#{params_for(service_types)}"
+      response = with_log { http_request(url) }
+
       response_body = JSON.parse(response.body)
 
       servicos = {}
@@ -51,8 +54,8 @@ module Rastreioz
 
     private
 
-    def http_request(url)
-      @uri = URI.parse(url)
+    def http_request(request_url)
+      @uri = URI.parse(request_url)
       @http = build_http
 
       request = Net::HTTP::Get.new(uri)
@@ -82,7 +85,10 @@ module Rastreioz
     end
 
     def service_codes_for(service_types)
-      service_types.map { |type| Rastreioz::Servico.code_from_type(type) }.join(",")
+      service_codes = service_types.is_a?(Array) ? service_types.map { |type| Rastreioz::Servico.code_from_type(type) }.join(",") :
+        Rastreioz::Servico.code_from_type(service_types)
+
+      service_codes
     end
 
     def code_from_type(type)
@@ -131,7 +137,7 @@ module Rastreioz
       )
     end      
 
-    attr_reader :uri, :http
+    attr_reader :uri, :url, :http
 
   end
 end
