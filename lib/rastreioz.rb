@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'log-me'
 require "rastreioz/version"
+require "rastreioz/servico"
 require "rastreioz/prazo"
 
 module Rastreioz

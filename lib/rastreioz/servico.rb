@@ -1,0 +1,106 @@
+# encoding: UTF-8
+
+module Rastreioz
+  class Servico
+
+    AVAILABLE_SERVICES = {
+      "04510" => { :type => :pac,                         :name => "PAC",            :description => "PAC sem contrato"                  },
+      "41068" => { :type => :pac_com_contrato,            :name => "PAC",            :description => "PAC com contrato"                  },
+      "04669" => { :type => :pac_com_contrato_2,          :name => "PAC",            :description => "PAC com contrato"                  },
+      "41300" => { :type => :pac_gf,                      :name => "PAC GF",         :description => "PAC para grandes formatos"         },
+      "04014" => { :type => :sedex,                       :name => "SEDEX",          :description => "SEDEX sem contrato"                },
+      "40045" => { :type => :sedex_a_cobrar,              :name => "SEDEX a Cobrar", :description => "SEDEX a Cobrar, sem contrato"      },
+      "40126" => { :type => :sedex_a_cobrar_com_contrato, :name => "SEDEX a Cobrar", :description => "SEDEX a Cobrar, com contrato"      },
+      "40215" => { :type => :sedex_10,                    :name => "SEDEX 10",       :description => "SEDEX 10, sem contrato"            },
+      "40290" => { :type => :sedex_hoje,                  :name => "SEDEX Hoje",     :description => "SEDEX Hoje, sem contrato"          },
+      "40096" => { :type => :sedex_com_contrato_1,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "40436" => { :type => :sedex_com_contrato_2,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "40444" => { :type => :sedex_com_contrato_3,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "40568" => { :type => :sedex_com_contrato_4,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "40606" => { :type => :sedex_com_contrato_5,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "04162" => { :type => :sedex_com_contrato_6,        :name => "SEDEX",          :description => "SEDEX com contrato"                },
+      "81019" => { :type => :e_sedex,                     :name => "e-SEDEX",        :description => "e-SEDEX, com contrato"             },
+      "81027" => { :type => :e_sedex_prioritario,         :name => "e-SEDEX",        :description => "e-SEDEX Prioritário, com contrato" },
+      "81035" => { :type => :e_sedex_express,             :name => "e-SEDEX",        :description => "e-SEDEX Express, com contrato"     },
+      "81868" => { :type => :e_sedex_grupo_1,             :name => "e-SEDEX",        :description => "(Grupo 1) e-SEDEX, com contrato"   },
+      "81833" => { :type => :e_sedex_grupo_2,             :name => "e-SEDEX",        :description => "(Grupo 2) e-SEDEX, com contrato"   },
+      "81850" => { :type => :e_sedex_grupo_3,             :name => "e-SEDEX",        :description => "(Grupo 3) e-SEDEX, com contrato"   }
+    }.freeze
+
+    AVAILABLE_METHODS = {
+      "Codigo" => "codigo",
+      "Valor" => "valor",
+      "PrazoEntrega" => "prazo_entrega",
+      "ValorMaoPropria" => "valor_mao_propria",
+      "ValorAvisoRecebimento" => "valor_aviso_recebimento",
+      "ValorValorDeclarado" => "valor_valor_declarado",
+      "EntregaDomiciliar" => "entrega_domiciliar",
+      "EntregaSabado" => "entrega_sabado",
+      "Erro" => "erro",
+      "MsgErro" => "msg_erro",
+      "obsFim" => "obs_fim"
+    }.freeze
+
+    attr_reader :codigo, :valor, :prazo_entrega
+    attr_reader :valor_mao_propria, :valor_aviso_recebimento, :valor_valor_declarado, :valor_sem_adicionais
+    attr_reader :entrega_domiciliar, :entrega_sabado, :erro, :msg_erro, :obs_fim
+
+    attr_reader :tipo, :nome, :descricao
+
+    def parse(element)
+
+      element.each do |attr, value|
+        instance_variable_set("@#{AVAILABLE_METHODS[attr]}", value.to_s) unless AVAILABLE_METHODS[attr].nil?
+      end
+
+      if AVAILABLE_SERVICES[codigo]
+        @tipo = AVAILABLE_SERVICES[codigo][:type]
+        @nome = AVAILABLE_SERVICES[codigo][:name]
+        @descricao = AVAILABLE_SERVICES[codigo][:description]
+      end
+
+      cast_to_float! :valor, :valor_mao_propria, :valor_aviso_recebimento, :valor_valor_declarado
+      cast_to_int! :prazo_entrega
+      cast_to_boolean! :entrega_domiciliar, :entrega_sabado
+
+      self
+    end
+
+    def success?
+      valor > 0.0
+    end
+    alias sucesso? success?
+
+    def error?
+      !success?
+    end
+    alias erro? error?
+
+    def self.code_from_type(type)
+      # I don't use select method for Ruby 1.8.7 compatibility.
+      AVAILABLE_SERVICES.map { |key, value| key if value[:type] == type }.compact.first
+    end
+
+    private
+
+    def cast_to_float!(*attributes)
+      attributes.each do |attr|
+        value = send(attr).to_s.gsub(".", "").gsub("," ,".")
+        instance_variable_set("@#{attr}", value.to_f)
+      end
+    end
+
+    def cast_to_int!(*attributes)
+      attributes.each do |attr|
+        instance_variable_set("@#{attr}", send(attr).to_i)
+      end
+    end
+
+    def cast_to_boolean!(*attributes)
+      attributes.each do |attr|
+        instance_variable_set("@#{attr}", send(attr) == "S")
+      end
+    end
+
+  end
+end
