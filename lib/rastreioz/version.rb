@@ -1,3 +1,3 @@
 module Rastreioz
-  VERSION = "0.1.0a"
+  VERSION = "0.1.1a"
 end
