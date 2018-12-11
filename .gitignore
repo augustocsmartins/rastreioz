@@ -1,11 +1,31 @@
-/.bundle/
-/.yardoc
-/_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/tmp/
+*.gem
+*.rbc
+.bundle
+.config
+.yardoc
+Gemfile.lock
+InstalledFiles
+_yardoc
+coverage
+doc/
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
 
 # rspec failure tracking
 .rspec_status
+
+# For MacOS:
+.DS_Store
+
+# For vim:
+*.swp
+*.swo
+
+# RVM
+.ruby-gemset
+.ruby-version

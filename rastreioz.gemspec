@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Augusto Cesar S. Martins"]
   spec.email         = ["augusto@base16.com.br"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Calculo de frete dos Correios utilizando a Rastreioz Api."
+  spec.description   = "Calculo de frete utilizando o Web Service Rastreioz (http://www.correios.com.br/webservices).\nOs servicos de frete suportados sao PAC, SEDEX, SEDEX a Cobrar, SEDEX 10, SEDEX Hoje e e-SEDEX."
+  spec.homepage      = "https://github.com/base16soft/rastreioz"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -31,6 +31,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_dependency "log-me", "~> 0.0.10"
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
