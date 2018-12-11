@@ -1,8 +1,8 @@
 # Rastreioz
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rastreioz`. To experiment with that code, run `bin/console` for an interactive prompt.
+VERSÃO ALFA DE TESTE!
 
-TODO: Delete this and the text above, and describe your gem
+Rastreioz::Prazo.calcular([:e_sedex, :sedex_10, :pac_com_contrato, :sedex_com_contrato_1], {cep_origem: 22041030, cep_destino: 22041030, peso: 1, formato: :caixa_pacote, comprimento: 20, altura: 4, largura: 11, diametro: 20, valor_declarado: 25.00})
 
 ## Installation
 
