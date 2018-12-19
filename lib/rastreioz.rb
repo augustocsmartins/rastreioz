@@ -1,9 +1,16 @@
 # encoding: UTF-8
 require 'rubygems'
 require 'log-me'
+require 'net/https'
+require 'json'
+require 'uri'
 require "rastreioz/version"
+require "rastreioz/log"
+require "rastreioz/http"
 require "rastreioz/servico"
-require "rastreioz/prazo"
+require "rastreioz/rastreamento"
+require "rastreioz/frete"
+require "rastreioz/cep"
 
 module Rastreioz
   extend LogMe
@@ -18,4 +25,15 @@ module Rastreioz
   end
 
   extend Timeout
+
+  class << self
+    def auth=(credentials)
+      @credentials = credentials
+    end
+
+    def auth
+      @credentials
+    end
+  end
+
 end
