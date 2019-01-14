@@ -7,6 +7,7 @@ require 'uri'
 require "rastreioz/version"
 require "rastreioz/log"
 require "rastreioz/http"
+require "rastreioz/auth"
 require "rastreioz/servico"
 require "rastreioz/rastreamento"
 require "rastreioz/frete"
@@ -27,12 +28,23 @@ module Rastreioz
   extend Timeout
 
   class << self
-    def auth=(credentials)
-      @credentials = credentials
+
+    def default_url
+      "https://77ykhqqwh8.execute-api.sa-east-1.amazonaws.com/prod"
     end
 
-    def auth
-      @credentials
+    def api_key=(api_key)
+      @api_key = api_key
+    end
+    def api_key
+      @api_key
+    end
+
+    def api_password=(api_password)
+      @api_password = api_password
+    end
+    def api_password
+      @api_password
     end
   end
 

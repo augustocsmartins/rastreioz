@@ -10,7 +10,7 @@ module Rastreioz
 
     def format_request_message(response)
       message =  with_line_break { "RastreioZ Request:" }
-      message << with_line_break { "GET #{response.uri}" }
+      message << with_line_break { "#{response.uri}" }
     end
 
     def format_response_message(response)

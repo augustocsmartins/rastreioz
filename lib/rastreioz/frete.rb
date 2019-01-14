@@ -17,7 +17,6 @@ module Rastreioz
       :valor_declarado => 0.0
     }
 
-    URL = "https://api.rastreioz.com/frete/prazo"
     FORMATS = { :caixa_pacote => 1, :rolo_prisma => 2, :envelope => 3 }
     CONDITIONS = { true => "S", false => "N" }
 
@@ -29,16 +28,12 @@ module Rastreioz
 
     def calcular(service_types)
       servicos = {}
-      begin
-        url = "#{URL}?#{params_for(service_types)}"
-        response = Rastreioz::Log.new.with_log {Rastreioz::Http.new.http_request(url)}
-        response_body = JSON.parse(response.body)
-        response_body.each do |element|
-          servico = Rastreioz::Servico.new.parse(element)
-          servicos[servico.tipo] = servico
-        end
-      rescue
-        raise "Falha na Consulta ao Correio"
+      url = "#{Rastreioz.default_url}/frete/prazo?#{params_for(service_types)}"
+      response = Rastreioz::Log.new.with_log {Rastreioz::Http.new.http_request(url)}
+      response_body = JSON.parse(response.body)
+      response_body.each do |element|
+        servico = Rastreioz::Servico.new.parse(element)
+        servicos[servico.tipo] = servico
       end
       servicos
     end
@@ -50,20 +45,20 @@ module Rastreioz
     private
 
     def params_for(service_types)
-      res = "sCepOrigem=#{self.cep_origem}&" +
-            "sCepDestino=#{self.cep_destino}&" +
-            "nVlPeso=#{self.peso}&" +
-            "nVlComprimento=#{format_decimal(self.comprimento)}&" +
-            "nVlLargura=#{format_decimal(self.largura)}&" +
-            "nVlAltura=#{format_decimal(self.altura)}&" +
-            "nVlDiametro=#{format_decimal(self.diametro)}&" +
-            "nCdFormato=#{FORMATS[self.formato]}&" +
-            "sCdMaoPropria=#{CONDITIONS[self.mao_propria]}&" +
-            "sCdAvisoRecebimento=#{CONDITIONS[self.aviso_recebimento]}&" +
-            "nVlValorDeclarado=#{format_decimal(format("%.2f" % self.valor_declarado))}&" +
-            "nCdServico=#{service_codes_for(service_types)}"
+      res = "cep_origem=#{self.cep_origem}&" +
+        "cep_destino=#{self.cep_destino}&" +
+        "peso=#{self.peso}&" +
+        "comprimento=#{format_decimal(self.comprimento)}&" +
+        "largura=#{format_decimal(self.largura)}&" +
+        "altura=#{format_decimal(self.altura)}&" +
+        "diametro=#{format_decimal(self.diametro)}&" +
+        "formato=#{FORMATS[self.formato]}&" +
+        "mao_propria=#{CONDITIONS[self.mao_propria]}&" +
+        "aviso_recebimento=#{CONDITIONS[self.aviso_recebimento]}&" +
+        "valor_declarado=#{format_decimal(format("%.2f" % self.valor_declarado))}&" +
+        "servicos=#{service_codes_for(service_types)}"
 
-      res = "#{res}&nCdEmpresa=#{self.codigo_empresa}&sDsSenha=#{self.senha}" if self.codigo_empresa && self.senha
+      res = "#{res}&codigo_empresa=#{self.codigo_empresa}&senha=#{self.senha}" if self.codigo_empresa && self.senha
       res
     end
 
@@ -75,8 +70,6 @@ module Rastreioz
       service_codes = service_types.is_a?(Array) ? 
         service_types.map { |type| Rastreioz::Servico.code_from_type(type) }.join(",") :
         Rastreioz::Servico.code_from_type(service_types)
-      
-      puts service_codes
       service_codes
     end
 
