@@ -30,7 +30,7 @@ module Rastreioz
   class << self
 
     def default_url
-      "https://77ykhqqwh8.execute-api.sa-east-1.amazonaws.com/prod"
+      "https://yxbb03ykfa.execute-api.sa-east-1.amazonaws.com/dev"
     end
 
     def api_key=(api_key)
