@@ -5,7 +5,7 @@ module Rastreioz
       @uri = URI.parse(request_url)
       @http = build_http(use_ssl)
       request = Net::HTTP::Get.new(@uri)
-      request['Authorization'] = Rastreioz::Auth.new.token
+      request['Authorization'] = Rastreioz::Auth.new.token(use_ssl)
       http.open_timeout = Rastreioz.request_timeout
       http.request(request)
     end
