@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Rastreioz::VERSION
   spec.authors       = ["Augusto Cesar S. Martins"]
   spec.email         = ["augusto@base16.com.br"]
-
-  spec.summary       = "Calculo de frete dos Correios utilizando a Rastreioz Api."
-  spec.description   = "[Alfa Version] Calculo de frete utilizando o Web Service Rastreioz.\nOs servicos de frete suportados sao PAC, SEDEX, SEDEX a Cobrar, SEDEX 10, SEDEX Hoje e e-SEDEX."
+  spec.summary       = "Consulta aos Correios utilizando a Rastreioz Api."
+  spec.description   = "Esta Gem pertence ao serviço Rastreioz, que permite consultar o serviço de calculo de preços e prazos, rastreamento de encomenda e consulta de endereços diretamente dos Correios, com resultado armazenado em cache de algumas horas para aumentar a velocidade e disponibilidade da consulta."
   spec.homepage      = "https://github.com/base16soft/rastreioz"
   spec.license       = "MIT"
 
