@@ -1,4 +1,5 @@
-require "pstore"
+require 'pstore'
+require 'tmpdir'
 
 module Rastreioz
   class Auth
@@ -7,7 +8,8 @@ module Rastreioz
 
       auth_token = nil
       if !Rastreioz.api_key.nil? && !Rastreioz.api_password.nil?
-        store = PStore.new("./data/pstore")
+        temp_dir = Rails.root.join('tmp') rescue Dir.tmpdir()
+        store = PStore.new("#{temp_dir}/pstore.data")
 
         auth_token = store.transaction { store[:auth_token] }
         expires_in = store.transaction { store[:expires_in] }
