@@ -20,6 +20,7 @@ module Rastreioz
     FORMATS = { :caixa_pacote => 1, :rolo_prisma => 2, :envelope => 3 }
     CONDITIONS = { true => "S", false => "N" }
 
+    
     def initialize(options = {})
       DEFAULT_OPTIONS.merge(options).each do |attr, value|
         self.send("#{attr}=", value)
@@ -39,6 +40,22 @@ module Rastreioz
     end
 
     def self.calcular(service_types, options = {})
+      self.new(options).calcular(service_types)
+    end
+
+    def update(service_types)
+      servicos = {}
+      url = "#{Rastreioz.default_url}/frete/prazo?#{params_for(service_types)}"
+      response = Rastreioz::Log.new.with_log {Rastreioz::Http.new.http_request(url)}
+      response_body = JSON.parse(response.body)
+      response_body.each do |element|
+        servico = Rastreioz::Servico.new.parse(element)
+        servicos[servico.tipo] = servico
+      end
+      servicos
+    end
+
+    def self.update(service_types, options = {})
       self.new(options).calcular(service_types)
     end
 
