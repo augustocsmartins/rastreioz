@@ -4,17 +4,24 @@ require 'log-me'
 require 'net/https'
 require 'json'
 require 'uri'
+require 'crack'
+require "rastreioz/app/log"
+require "rastreioz/app/http"
+require "rastreioz/app/auth"
+require "rastreioz/app/servico"
+require "rastreioz/app/frete"
+require "rastreioz/app/rastreamento"
+require "rastreioz/app/calcula_frete"
+require "rastreioz/app/cep"
+require "rastreioz/engine"
 require "rastreioz/version"
-require "rastreioz/log"
-require "rastreioz/http"
-require "rastreioz/auth"
-require "rastreioz/servico"
-require "rastreioz/rastreamento"
-require "rastreioz/frete"
-require "rastreioz/cep"
 
 module Rastreioz
   extend LogMe
+
+  def self.table_name_prefix
+    'rastreioz_'
+  end
 
   module Timeout
     DEFAULT_REQUEST_TIMEOUT = 10 #seconds
@@ -30,7 +37,7 @@ module Rastreioz
   class << self
 
     def default_url
-      "https://api.rastreioz.com"
+      "http://ws.correios.com.br"
     end
 
     def api_key=(api_key)
