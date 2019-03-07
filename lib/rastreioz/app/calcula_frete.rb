@@ -25,10 +25,6 @@ module Rastreioz
         end
       end
 
-=begin
-Rastreioz::App::CalculaFrete.calcular([:pac_com_contrato, :sedex_com_contrato_1, :sedex_10], {max_weight: 1.0, cep_origem: "01154010", comprimento: 20, altura: 20, largura: 20, codigo_empresa: 15022544, senha: 18203481})
-=end
-
       def calcular(service_types)
         service_codes = Rastreioz::App::Frete.new.service_codes_for(service_types)
 

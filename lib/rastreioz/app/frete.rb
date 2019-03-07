@@ -27,10 +27,6 @@ module Rastreioz
         end
       end
 
-=begin
-webservice = Rastreioz::App::Frete.api_frete([:pac_com_contrato, :sedex_com_contrato_1, :sedex_10, { cep_origem: "01154010", cep_destino: "12221150", peso: 0.8, comprimento: 20, altura: 20, largura: 20, codigo_empresa: 15022544, senha: 18203481 })
-=end
-
       def lista_frete(service_types)
         zipcode = self.cep_destino.gsub(/\D/, "").to_i
         servicos = {}
@@ -58,8 +54,6 @@ webservice = Rastreioz::App::Frete.api_frete([:pac_com_contrato, :sedex_com_cont
 
           if response.code == '200'
             response_body = Crack::XML.parse(response.body)
-
-            # binding.pry
 
             if response_body["cResultado"].present? && response_body["cResultado"]["Servicos"].present?
               response_body["cResultado"]["Servicos"].each do |element|

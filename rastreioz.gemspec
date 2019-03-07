@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Augusto Cesar S. Martins"]
   spec.email         = ["augusto@base16.com.br"]
   spec.summary       = "Consulta aos Correios utilizando a Rastreioz Api."
-  spec.description   = "Esta Gem pertence ao serviço Rastreioz, que permite consultar o serviço de calculo de preços e prazos, rastreamento de encomenda e consulta de endereços diretamente dos Correios, com resultado armazenado em cache de algumas horas para aumentar a velocidade e disponibilidade da consulta."
+  spec.description   = "Esta Gem pertence ao serviço Rastreioz, que permite consultar o serviço de calculo de preços e prazos, rastreamento de encomenda e consulta de endereços diretamente dos Correios, com resultado armazenado uma tabela para aumentar a velocidade e disponibilidade da consulta."
   spec.homepage      = "https://github.com/base16soft/rastreioz"
   spec.license       = "MIT"
 

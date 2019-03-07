@@ -102,7 +102,7 @@ module Rastreioz
         ranges = []
         if service_code == "40215" || service_code == "40290"
           ranges = [
-            {estado: 'AC', tipo: 'capital', nome: 'Rio Branco', faixas: ['69900000', '69920999', '69911-776']},
+            {estado: 'AC', tipo: 'capital', nome: 'Rio Branco', faixas: ['69900000', '69923999', '69911-776']},
             {estado: 'AL', tipo: 'capital', nome: 'Maceió', faixas: ['57000000', '57099999', '57010-003']},
             {estado: 'AM', tipo: 'capital', nome: 'Manaus', faixas: ['69000000', '69099999', '69083-350']},
             {estado: 'AP', tipo: 'capital', nome: 'Macapá', faixas: ['68900000', '68914999', '68909-167']},
@@ -111,7 +111,7 @@ module Rastreioz
             {estado: 'DF', tipo: 'capital', nome: 'Brasília', faixas: ['70000000', '70999999', '71900-500']},
             {estado: 'DF', tipo: 'capital', nome: 'Brasília', faixas: ['71000000', '73699999', '73090-135']},
             {estado: 'ES', tipo: 'capital', nome: 'Vitória', faixas: ['29000000', '29099999', '29060-017']},
-            {estado: 'GO', tipo: 'capital', nome: 'Goiânia', faixas: ['72800000', '74894999', '74343-610']},
+            {estado: 'GO', tipo: 'capital', nome: 'Goiânia', faixas: ['74000000', '74983999', '74343-610']},
             {estado: 'MA', tipo: 'capital', nome: 'São Luiz', faixas: ['65000000', '65099999', '65072-405']},
             {estado: 'MG', tipo: 'capital', nome: 'Belo Horizonte', faixas: ['30000000', '34999999', '31540-473']},
             {estado: 'MS', tipo: 'capital', nome: 'Campo Grande', faixas: ['79000000', '79129999', '79104-570']},
@@ -125,7 +125,7 @@ module Rastreioz
             {estado: 'RJ', tipo: 'interior', nome: 'Interior do RJ', faixas: ['26601000', '28999999', '28035-005']},
             {estado: 'RN', tipo: 'capital', nome: 'Natal', faixas: ['59000000', '59099999', '59123-029']},
             {estado: 'RN', tipo: 'interior', nome: 'Interior do RN', faixas: ['59100000', '59999999', '59612-300']},
-            {estado: 'RO', tipo: 'capital', nome: 'Porto Velho', faixas: ['78900000', '78930999', '76801-016']},
+            {estado: 'RO', tipo: 'capital', nome: 'Porto Velho', faixas: ['76800000', '76823999', '76801-016']},
             {estado: 'RR', tipo: 'capital', nome: 'Boa Vista', faixas: ['69300000', '69339999', '69310-030']},
             {estado: 'RS', tipo: 'capital', nome: 'Porto Alegre', faixas: ['90000000', '94900999', '91330-730']},
             {estado: 'RS', tipo: 'interior', nome: 'Interior do RS', faixas: ['94901000', '99999999', '94475-770']},
@@ -137,8 +137,8 @@ module Rastreioz
           ]     
         else
           ranges = [
-            {estado: 'AC', tipo: 'capital', nome: 'Rio Branco', faixas: ['69900000', '69920999', '69911-776']},
-            {estado: 'AC', tipo: 'interior', nome: 'Interior do AC', faixas: ['69921000', '69999999', '69970-000']},
+            {estado: 'AC', tipo: 'capital', nome: 'Rio Branco', faixas: ['69900000', '69923999', '69911-776']},
+            {estado: 'AC', tipo: 'interior', nome: 'Interior do AC', faixas: ['69924000', '69999999', '69970-000']},
             {estado: 'AL', tipo: 'capital', nome: 'Maceió', faixas: ['57000000', '57099999', '57010-003']},
             {estado: 'AL', tipo: 'interior', nome: 'Interior do AL', faixas: ['57100000', '57999999', '57602-640']},
             {estado: 'AM', tipo: 'capital', nome: 'Manaus', faixas: ['69000000', '69099999', '69083-350']},
@@ -153,8 +153,8 @@ module Rastreioz
             {estado: 'DF', tipo: 'capital', nome: 'Brasília', faixas: ['71000000', '73699999', '73090-135']},
             {estado: 'ES', tipo: 'capital', nome: 'Vitória', faixas: ['29000000', '29099999', '29060-017']},
             {estado: 'ES', tipo: 'interior', nome: 'Interior do ES', faixas: ['29100000', '29999999', '29860-000']},
-            {estado: 'GO', tipo: 'capital', nome: 'Goiânia', faixas: ['72800000', '74894999', '74343-610']},
-            {estado: 'GO', tipo: 'interior', nome: 'Interior de GO', faixas: ['74895000', '76799999', '76330-000']},
+            {estado: 'GO', tipo: 'capital', nome: 'Goiânia', faixas: ['74000000', '74983999', '74343-610']},
+            {estado: 'GO', tipo: 'interior', nome: 'Interior de GO', faixas: ['74984000', '76799999', '76330-000']},
             {estado: 'MA', tipo: 'capital', nome: 'São Luiz', faixas: ['65000000', '65099999', '65072-405']},
             {estado: 'MA', tipo: 'interior', nome: 'Interior do MA', faixas: ['65100000', '65999999', '65940-000']},
             {estado: 'MG', tipo: 'capital', nome: 'Belo Horizonte', faixas: ['30000000', '34999999', '31540-473']},
@@ -177,8 +177,8 @@ module Rastreioz
             {estado: 'RJ', tipo: 'interior', nome: 'Interior do RJ', faixas: ['26601000', '28999999', '28035-005']},
             {estado: 'RN', tipo: 'capital', nome: 'Natal', faixas: ['59000000', '59099999', '59123-029']},
             {estado: 'RN', tipo: 'interior', nome: 'Interior do RN', faixas: ['59100000', '59999999', '59612-300']},
-            {estado: 'RO', tipo: 'capital', nome: 'Porto Velho', faixas: ['78900000', '78930999', '76801-016']},
-            {estado: 'RO', tipo: 'interior', nome: 'Interior de RO', faixas: ['78931000', '78999999', '76890-000']},
+            {estado: 'RO', tipo: 'capital', nome: 'Porto Velho', faixas: ['76800000', '76823999', '76801-016']},
+            {estado: 'RO', tipo: 'interior', nome: 'Interior de RO', faixas: ['76824000', '76999999', '76890-000']},
             {estado: 'RR', tipo: 'capital', nome: 'Boa Vista', faixas: ['69300000', '69339999', '69310-030']},
             {estado: 'RR', tipo: 'interior', nome: 'Interior de RR', faixas: ['69340000', '69389999', '69373-000']},
             {estado: 'RS', tipo: 'capital', nome: 'Porto Alegre', faixas: ['90000000', '94900999', '91330-730']},
